@@ -16,8 +16,8 @@ class MenuController extends Controller
     {
         //
         $items = Menu::latest()->paginate(5);
-     
-        return view('Menu/index');
+
+        return view('Menu/index',compact('items'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**

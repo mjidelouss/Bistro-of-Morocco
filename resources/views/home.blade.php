@@ -97,9 +97,21 @@
                 <div class="input-group d-flex">
                     <div class="form-outline">
                         <select class="form-control" id="filter" name="filter" style="width: 12rem;">
-                        <option value="0">All Categories</option>
-                        
-                        </select>
+                            <option value="0">All Categories</option>
+                            @php
+                                $c = 1;
+                            @endphp
+                            @foreach ($categories as $category)
+                                @if(request()->post("filter") == {{ $c }})
+                                    <option value="{{$c}}" selected>{{ $category->category }}</option>
+                                @else
+                                    <option value="{{$c}}">{{ $category->category }}</option>
+                                @endif
+                            @php
+                                $c++;
+                            @endphp
+                            @endforeach
+                            </select>
                     </div>
                     <button type="submit" name="search" class="btn btn-primary rounded ms-2">
                         <i class="fas fa-search"></i>

@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/dashboard', [App\Http\Controllers\MenuController::class, 'index'])->name('index');
+Route::resource('/home', App\Http\Controllers\HomeController::class);
+Route::get('/create', [App\Http\Controllers\MenuController::class, 'create'])->name('create');
+// Route::post('/dashboard/store', [App\Http\Controllers\MenuController::class, 'store'])->name('store');

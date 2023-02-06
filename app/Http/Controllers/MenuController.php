@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -14,10 +15,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        //
-        $items = Menu::latest()->paginate(5);
-
-        return view('Menu/index',compact('items'))->with('i', (request()->input('page', 1) - 1) * 5);
+        return ('hello world');
     }
 
     /**
@@ -28,6 +26,7 @@ class MenuController extends Controller
     public function create()
     {
         //
+        return view('create');
     }
 
     /**
@@ -39,6 +38,24 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         //
+        $item = new Menu;
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
+        if ($image = $request->file('image')) {
+            $destinationPath = 'img/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $item->image = "$profileImage";
+        }
+        $item->name = $request->name;
+        $item->description = $request->description;
+        $item->price = $request->price;
+        $item->save();
+        return redirect()->route('home')->with('success','Item created successfully.');
     }
 
     /**

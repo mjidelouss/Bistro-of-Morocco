@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('/welcome');
+    return view('welcome');
 });
 
-Auth::routes();
+Route::middleware(['auth', 'admin'])->group(function (){
+    Route::get('/dashboard', [ItemController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/create', [ItemController::class, 'create'])->name('create');
+    Route::post('/dashboard/store', 'ItemController@store')->name('store');
+    Route::get('/dashboard/destroy/{id}', [ItemController::class,'destroy'])->name('destroy');
+    Route::get('/dashboard/edit/{id}', [ItemController::class,'edit'])->name('edit');
+});
 
-Route::resource('/home', App\Http\Controllers\HomeController::class);
-Route::get('/create', [App\Http\Controllers\MenuController::class, 'create'])->name('create');
-// Route::post('/dashboard/store', [App\Http\Controllers\MenuController::class, 'store'])->name('store');
+// Route::resource('/home', App\Http\Controllers\HomeController::class);

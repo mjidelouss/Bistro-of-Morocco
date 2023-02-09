@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +20,13 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'admin'])->group(function (){
-    Route::get('/dashboard', [ItemController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [ItemConroller::class, 'index'])->name('dashboard');
     Route::get('/dashboard/create', [ItemController::class, 'create'])->name('create');
     Route::post('/dashboard/store', 'ItemController@store')->name('store');
     Route::get('/dashboard/destroy/{id}', [ItemController::class,'destroy'])->name('destroy');
     Route::get('/dashboard/edit/{id}', [ItemController::class,'edit'])->name('edit');
 });
+Route::resource('/home', App\Http\Controllers\HomeController::class);
+Auth::routes();
 
-// Route::resource('/home', App\Http\Controllers\HomeController::class);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

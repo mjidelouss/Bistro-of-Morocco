@@ -7,7 +7,7 @@ use App\Models\Item;
 use App\Models\Category;
 use App\Models\User;
 
-class ItemsController extends Controller
+class ItemController extends Controller
 {
     //
     /**
@@ -75,7 +75,7 @@ class ItemsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Item  $product
+     * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
     public function show(Item $item)

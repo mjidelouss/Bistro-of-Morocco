@@ -52,7 +52,7 @@
                 <div class="d-flex align-items-center">
                     <i class="fas fa-bars primary-text fs-4 me-3" style="color: black; cursor: pointer;"
                         id="controlPanel" onclick="wrapside()"></i>
-                    <h2 class="fs-2 m-0 text-black ms-3">Add Item</h2>
+                    <h2 class="fs-2 m-0 text-black ms-3">Edit Item</h2>
                 </div>
                 <div class="d-flex">
                     <div class="">
@@ -65,20 +65,20 @@
             </nav>
             <!-- Start -->
             <div class="conatiner-fluid blog">
-                <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('update'), $item->id}}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong class="fs-5">Name:</strong>
-                                <input type="text" name="name" class="form-control mb-2" placeholder="Name">
+                                <input type="text" name="name" class="form-control mb-2" value="{{ $item->name }}">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong class="fs-5">Price:</strong>
-                                <input type="text" name="price" class="form-control mb-2" placeholder="Price">
+                                <input type="text" name="price" class="form-control mb-2" value="{{ $item->price }}">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -95,18 +95,18 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong class="fs-5">Description:</strong>
-                                <textarea class="form-control mb-2" style="height:150px" name="description" placeholder="Description"></textarea>
+                                <textarea class="form-control mb-2" style="height:150px" name="description" value="{{ $item->description }}"></textarea>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong class="fs-5">Image:</strong>
-                                <input type="file" name="image" class="form-control mb-2" placeholder="image">
+                                <input type="file" name="image" class="form-control mb-2" value="{{ $item->image }}">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <input type="submit" id="save-article" name="save" value="Save"
-                                class="form-control btn btn-primary opacity-50 mt-2 p-3" name="add_item">
+                            <input type="submit" id="save-article" name="update" value="Update"
+                                class="form-control btn btn-success opacity-50 mt-2 p-3" name="update">
                         </div>
                     </div>
 

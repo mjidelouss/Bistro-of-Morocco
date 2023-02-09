@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->integer('price');
@@ -33,9 +33,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('menus', function (Blueprint $table) {
+        Schema::table('items', function (Blueprint $table) {
             $table->dropForeign(['category_id']);
         });
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('items');
     }
 };

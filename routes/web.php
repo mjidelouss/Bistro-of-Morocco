@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +16,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('/welcome');
+    return view('welcome');
 });
 
+Route::middleware(['auth', 'admin'])->group(function (){
+    Route::get('/dashboard', [ItemConroller::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/create', [ItemController::class, 'create'])->name('create');
+    Route::post('/dashboard/store', 'ItemController@store')->name('store');
+    Route::get('/dashboard/destroy/{id}', [ItemController::class,'destroy'])->name('destroy');
+    Route::get('/dashboard/edit/{id}', [ItemController::class,'edit'])->name('edit');
+});
+Route::resource('/home', App\Http\Controllers\HomeController::class);
 Auth::routes();
 
-Route::resource('/home', App\Http\Controllers\HomeController::class);
-Route::get('/create', [App\Http\Controllers\MenuController::class, 'create'])->name('create');
-// Route::post('/dashboard/store', [App\Http\Controllers\MenuController::class, 'store'])->name('store');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

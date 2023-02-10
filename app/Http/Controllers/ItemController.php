@@ -56,7 +56,7 @@ class ItemController extends Controller
             'name' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         if ($image = $request->file('image')) {
             $destinationPath = 'img/';
@@ -108,24 +108,27 @@ class ItemController extends Controller
     {
         //
         $request->validate([
-            'name' => 'required',
-            'price' => 'required',
-            'category' => 'required',
-            'description' => 'required',
-            'image' => 'required'
+            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'name' => 'required',
+            // 'price' => 'required',
+            // 'category_id' => 'required',
+            // 'description' => 'required',
         ]);
-        
-        $item = Item::find($id);
 
-        $item->name = $request->name;
-        $item->price = $request->price;
-        $item->description = $request->description;
-        $item->category = $request->category;
-        $item->image = $request->image;
-        $item->save();        
-     
-        return redirect()->route('dashboard')
-                        ->with('success','Product updated successfully');
+        $item = Item::find($id);
+        $input = $request->all();
+
+        if ($image = $request->file('image')) {
+            $destinationPath = 'img/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+        }
+        // }else{
+        //     unset($input['image']);
+        // }
+        $item->update($input);
+        return redirect()->route('dashboard')->with('success','Item updated successfully');
     }
 
     /**

@@ -28,14 +28,14 @@
                     class=""></i>Bistro <span style="color: hsl(33, 75%, 62%)">Maroc</span>
             </div>
             <div class="list-group list-group-flush my-3">
-                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-transparent"><i
+                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-transparent fw-bold"><i
                         class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
-                <a href=""
+                <a href="{{ route('profile.edit') }}"
                     class="list-group-item list-group-item-action bg-transparent second-text text-black fw-bold"><i
                         class="fa fa-user me-2 text-black"></i> Profile</a>
                 <a href="{{ route('create') }}"
                     class="list-group-item list-group-item-action bg-transparent second-text fw-bold active"
-                    onclick="resetItemForm()"><i class="fa fa-plus me-2"></i>Add Item</a>
+                    onclick="resetItemForm()"><i class="fas fa-edit me-2"></i>Edit Item</a>
                 <a class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-danger"
                     href="{{ route('logout') }}"
                     onclick="event.preventDefault();
@@ -65,8 +65,9 @@
             </nav>
             <!-- Start -->
             <div class="conatiner-fluid blog">
-                <form action="{{ route('update'), $item->id}}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('update', $item->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
 
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -84,9 +85,12 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong class="fs-5">Category:</strong>
-                                <select class="form-control mb-2" name="category" required>
-                                    <option value="0" disabled selected> Select Category</option>
+                                <select class="form-control mb-2" name="category_id" required>
+                                    <option disabled selected> Select Category</option>
                                     @foreach ($categories as $category)
+                                    @if ($item->category_id == ++$c)
+                                        <option value="{{ $c++ }}" selected>{{ $category->category }}</option>
+                                    @endif
                                         <option value="{{ ++$c }}">{{ $category->category }}</option>
                                     @endforeach
                                 </select>
@@ -95,18 +99,18 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong class="fs-5">Description:</strong>
-                                <textarea class="form-control mb-2" style="height:150px" name="description" value="{{ $item->description }}"></textarea>
+                                <textarea class="form-control mb-2" style="height:150px" name="description">{{ $item->description }}</textarea>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <div class="form-group">
                                 <strong class="fs-5">Image:</strong>
-                                <input type="file" name="image" class="form-control mb-2" value="{{ $item->image }}">
+                                <input value="" type="file" name="image" class="form-control mb-2">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                             <input type="submit" id="save-article" name="update" value="Update"
-                                class="form-control btn btn-success opacity-50 mt-2 p-3" name="update">
+                                class="form-control btn btn-success opacity-75 mt-2 p-3" name="update">
                         </div>
                     </div>
 

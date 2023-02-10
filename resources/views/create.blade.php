@@ -28,7 +28,7 @@
                     class=""></i>Bistro <span style="color: hsl(33, 75%, 62%)">Maroc</span>
             </div>
             <div class="list-group list-group-flush my-3">
-                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-transparent"><i
+                <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-transparent fw-bold"><i
                         class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
                 <a href=""
                     class="list-group-item list-group-item-action bg-transparent second-text text-black fw-bold"><i

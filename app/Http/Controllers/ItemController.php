@@ -29,6 +29,18 @@ class ItemController extends Controller
         return view('dashboard',compact('items', 'itemCount', 'userCount', 'categories', 'c'))->with('i');
     }
 
+    public function index2()
+    {
+        //
+        $items = Item::join('categories', 'items.category_id', '=', 'categories.id')
+             ->select('items.*', 'categories.category')
+             ->get();
+            $categories = Category::all();
+            $i = 0;
+            $c = 0;
+        return view('home',compact('items', 'i', 'categories', 'c'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -78,9 +90,11 @@ class ItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show(Item $item)
+    public function show($id)
     {
         //
+        $item = Item::find($id);
+        return view('show', compact('item'));
     }
 
     /**
@@ -108,11 +122,11 @@ class ItemController extends Controller
     {
         //
         $request->validate([
-            // 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            // 'name' => 'required',
-            // 'price' => 'required',
-            // 'category_id' => 'required',
-            // 'description' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name' => 'required',
+            'price' => 'required',
+            'category_id' => 'required',
+            'description' => 'required',
         ]);
 
         $item = Item::find($id);

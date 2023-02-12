@@ -21,12 +21,14 @@ class ItemController extends Controller
         $items = Item::join('categories', 'items.category_id', '=', 'categories.id')
              ->select('items.*', 'categories.category')
              ->get();
-            $itemCount = Item::count();
-            $userCount = User::count();
-            $categories = Category::all();
-            $i = 0;
-            $c = 0;
-        return view('dashboard',compact('items', 'itemCount', 'userCount', 'categories', 'c'))->with('i');
+        $itemCount = Item::count();
+        $foodCount = Item::where('category_id', 1)->count();
+        $drinkCount = Item::where('category_id', 2)->count();
+        $userCount = User::where('role', 0)->count();
+        $categories = Category::all();
+        $i = 0;
+        $c = 0;
+        return view('dashboard',compact('items', 'itemCount', 'userCount', 'categories', 'c', 'foodCount', 'drinkCount'))->with('i');
     }
 
     public function index2()

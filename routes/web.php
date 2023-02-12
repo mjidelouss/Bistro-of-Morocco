@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,15 +37,18 @@ Route::middleware(['auth', 'admin'])->group(function (){
     Route::get('/dashboard/destroy/{id}', [ItemController::class,'destroy'])->name('destroy');
     Route::get('/dashboard/edit/{id}', [ItemController::class,'edit'])->name('edit');
     Route::put('/dashboard/update/{id}',[ItemController::class, 'update'])->name('update');
+    Route::put('/dashboard', [CategoryController::class, 'store'])->name('search');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::delete('/profile', [ProfileController::class, 'addAdmin']);
+    Route::delete('/profile', [ProfileController::class, 'store'])->name('profile.store');
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('/home' ,[ItemController::class, 'index2'])->name('home');
     Route::get('/show/{id}' ,[ItemController::class, 'show'])->name('show');
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/Userprofile', [ProfileController::class, 'user'])->name('profile.user');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });

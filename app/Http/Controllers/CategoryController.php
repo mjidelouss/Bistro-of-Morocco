@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Item;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -36,6 +38,17 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $id = $request->input('c');
+        $item1 = Item::where('category_id', $id)->get();
+        $items = Item::join('categories', 'items.category_id', '=', 'categories.id')
+                        ->select('items.*', 'categories.category')
+                        ->get();
+        $itemCount = Item::count();
+        $userCount = User::where('role', 0)->count();
+        $categories = Category::all();
+        $i = 0;
+        $c = 0;
+        return view('dashboard',compact('items', 'itemCount', 'userCount', 'categories', 'c'))->with('i');
     }
 
     /**

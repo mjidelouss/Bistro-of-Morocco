@@ -82,10 +82,19 @@
                     <div class="col-lg-2 col-md-4 col-sm-5">
                         <div class="p-2 bg-white d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <h3 class="fs-2">{{ $itemCount }}</h3>
-                            <p class="fs-5 text-black">Authors</p>
+                                <h3 class="fs-2">{{ $foodCount }}</h3>
+                            <p class="fs-5 text-black">Foods</p>
                             </div>
-                            <i class="fa fa-people-group fs-1 text-info border rounded-full p-3 ms-1" style="background-color: white;"></i>
+                            <i class="fa fa-burger fs-1 text-info border rounded-full p-3 ms-1" style="background-color: white;"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-5">
+                        <div class="p-2 bg-white d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">{{ $drinkCount }}</h3>
+                            <p class="fs-5 text-black">Drinks</p>
+                            </div>
+                            <i class="fa fa-cocktail fs-1 text-info border rounded-full p-3 ms-1" style="background-color: white;"></i>
                         </div>
                     </div>
                 </div>
@@ -93,7 +102,9 @@
                     <h3 class="fs-4 text-black">Available Items</h3>
                 </div>
                 <div class="mb-3">
-                <form action="" method="POST">
+                <form action="{{route('search')}}" method="POST">
+                @csrf
+		        @method('PUT')
                 <div class="input-group d-flex">
                     <div class="form-outline">
                         <select class="form-control" id="filter" name="filter" style="width: 12rem;">
@@ -126,12 +137,12 @@
             <tr>
             <td class="fw-bolder">{{ ++$i }}</td>
             <td><img src="/img/{{ $item->image }}" width="85px"></td>
-            <td class="fw-bolder">{{ $item->name }}</td>
-            <td class="fw-bolder">{{ $item->price }} DH</td>
-            <td class="fw-bolder">{{ $item->category }}</td>
+            <td class="fw-bolder" style="color: hsl(14, 88%, 50%)">{{ $item->name }}</td>
+            <td class="fw-bolder" style="color: hsl(112, 74%, 36%)">{{ $item->price }} DH</td>
+            <td class="fw-bolder" style="color: hsl(47, 87%, 53%)">{{ $item->category }}</td>
             <td>
-                <a href="{{ route('edit', $item->id) }}" class="btn btn-success opacity-75">Edit</a>
-                <a href="{{ route('destroy',$item->id) }}" type="submit" class="btn btn-danger">Delete</a>
+                <a href="{{ route('edit', $item->id) }}" class="btn btn-success opacity-75" style="width: 55px;">Edit</a>
+                <a href="{{ route('destroy',$item->id) }}" type="submit" class="btn btn-danger" style="width: 55px;">Delete</a>
             </td>
         </tr>
         @endforeach

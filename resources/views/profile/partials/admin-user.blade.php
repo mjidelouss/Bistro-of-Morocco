@@ -10,12 +10,16 @@
     </header>
 
     <div class="mb-3">
-        <form action="" method="POST">
+        <form action="{{route('profile.store')}}" method="POST">
+        @csrf
+		@method('PUT')
         <div class="input-group d-flex">
             <div class="form-outline">
                 <select class="form-control" id="admin" name="admin" style="width: 12rem;">
-                    <option value="0">All Users</option>
-                    
+                    <option value="0">Select User</option>
+                    @foreach ($users as $user)
+                        <option value="{{ ++$i }}">{{ $user->name }}</option>
+                    @endforeach
                     </select>
             </div>
             <button type="submit" name="apply" class="btn btn-primary opacity-50 rounded ms-2">

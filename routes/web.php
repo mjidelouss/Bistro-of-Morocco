@@ -18,9 +18,9 @@ use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware(['auth','verified']);
 
-Route::middleware(['auth', 'admin'])->group(function (){
+Route::middleware(['auth', 'admin', 'verified'])->group(function (){
     Route::get('/dashboard', [ItemController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/create', [ItemController::class, 'create'])->name('create');
     Route::post('/dashboard/store', [ItemController::class, 'store'])->name('store');
@@ -33,7 +33,7 @@ Route::middleware(['auth', 'admin'])->group(function (){
     Route::put('/profile', [ProfileController::class, 'store'])->name('profile.store');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'verified')->group(function () {
     Route::get('/home' ,[ItemController::class, 'index2'])->name('home');
     Route::get('/show/{id}' ,[ItemController::class, 'show'])->name('show');
     Route::get('/Userprofile', [ProfileController::class, 'user'])->name('profile.user');

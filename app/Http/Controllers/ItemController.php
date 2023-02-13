@@ -81,7 +81,7 @@ class ItemController extends Controller
         $item->price = $request->price;
         $item->category_id = $request->category;
         $item->save();
-        return redirect()->route('dashboard')->with('success','Item created successfully.');
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -139,7 +139,7 @@ class ItemController extends Controller
             $input['image'] = "$profileImage";
         }
         $item->update($input);
-        return redirect()->route('dashboard')->with('success','Item updated successfully');
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -152,6 +152,6 @@ class ItemController extends Controller
     {
         //
         Item::destroy($id);
-        return redirect()->route('dashboard')->with('success','Item deleted successfully');
+        return redirect()->route('dashboard');
     }
 }

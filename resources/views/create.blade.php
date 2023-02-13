@@ -30,7 +30,7 @@
             <div class="list-group list-group-flush my-3">
                 <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-transparent fw-bold"><i
                         class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
-                <a href=""
+                <a href="{{ route('profile.edit') }}"
                     class="list-group-item list-group-item-action bg-transparent second-text text-black fw-bold"><i
                         class="fa fa-user me-2 text-black"></i> Profile</a>
                 <a href="{{ route('create') }}"

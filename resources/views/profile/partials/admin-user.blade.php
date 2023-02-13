@@ -10,20 +10,20 @@
     </header>
 
     <div class="mb-3">
-        <form action="{{route('profile.store')}}" method="POST">
+        <form action="{{ route('profile.store') }}" method="POST">
         @csrf
 		@method('PUT')
         <div class="input-group d-flex">
             <div class="form-outline">
-                <select class="form-control" id="admin" name="admin" style="width: 12rem;">
+                <select class="form-control" id="" name="userId" style="width: 12rem;">
                     <option value="0">Select User</option>
                     @foreach ($users as $user)
-                        <option value="{{ ++$i }}">{{ $user->name }}</option>
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
                     @endforeach
                     </select>
             </div>
             <button type="submit" name="apply" class="btn btn-primary opacity-50 rounded ms-2">
-                <i class="fas fa-search text-black"></i>
+                <i class="fas fa-hand-pointer text-black"></i>
             </button>
           </form>
         </div>

@@ -101,25 +101,6 @@
                 <div class="row my-4">
                     <h3 class="fs-4 text-black">Available Items</h3>
                 </div>
-                <div class="mb-3">
-                <form action="{{route('search')}}" method="POST">
-                @csrf
-		        @method('PUT')
-                <div class="input-group d-flex">
-                    <div class="form-outline">
-                        <select class="form-control" id="filter" name="filter" style="width: 12rem;">
-                            <option value="0">All Categories</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ ++$c }}">{{ $category->category }}</option>
-                            @endforeach
-                            </select>
-                    </div>
-                    <button type="submit" name="search" class="btn btn-primary rounded ms-2">
-                        <i class="fas fa-search"></i>
-                    </button>
-                  </form>
-                </div>
-                </div>
                     <div class="col table-responsive mb-2">
                         <table id="data-table" class="table bg-white rounded shadow-sm table-hover">
                             <thead>

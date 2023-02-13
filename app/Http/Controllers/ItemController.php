@@ -25,10 +25,8 @@ class ItemController extends Controller
         $foodCount = Item::where('category_id', 1)->count();
         $drinkCount = Item::where('category_id', 2)->count();
         $userCount = User::where('role', 0)->count();
-        $categories = Category::all();
         $i = 0;
-        $c = 0;
-        return view('dashboard',compact('items', 'itemCount', 'userCount', 'categories', 'c', 'foodCount', 'drinkCount'))->with('i');
+        return view('dashboard',compact('items', 'itemCount', 'userCount', 'foodCount', 'drinkCount', 'i'));
     }
 
     public function index2()
@@ -140,9 +138,6 @@ class ItemController extends Controller
             $image->move($destinationPath, $profileImage);
             $input['image'] = "$profileImage";
         }
-        // }else{
-        //     unset($input['image']);
-        // }
         $item->update($input);
         return redirect()->route('dashboard')->with('success','Item updated successfully');
     }

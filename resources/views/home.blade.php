@@ -61,23 +61,6 @@
                 <div class="row my-2">
                     <h3 class="fs-4 text-black">Today's Menu</h3>
                 </div>
-                <div class="mb-3">
-                <form action="" method="POST">
-                <div class="input-group d-flex">
-                    <div class="form-outline">
-                        <select class="form-control" id="filter" name="filter" style="width: 12rem;">
-                            <option value="0">All Categories</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ ++$c }}">{{ $category->category }}</option>
-                            @endforeach
-                            </select>
-                    </div>
-                    <button type="submit" name="search" class="btn btn-primary rounded ms-2">
-                        <i class="fas fa-search"></i>
-                    </button>
-                  </form>
-                </div>
-                </div>
                 <div class="row">
                 @foreach ($items as $item)
                         <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-4">
